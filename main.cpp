@@ -24,6 +24,5 @@ int main()
                 );
 
     SDL_Delay(10000);
-
 }
 

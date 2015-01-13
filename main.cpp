@@ -46,7 +46,7 @@ int main()
 
     glMatrixMode(GL_MODELVIEW);
     gluLookAt(2,2,2,0,0,0,0,1,0);
-
+    glEnable(GL_DEPTH_TEST);
     bool quit=false;
     SDL_Event event;
     while(!quit)
@@ -68,7 +68,7 @@ int main()
             }
         }
 
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         //drawTriangle();
         drawCube();
 
@@ -96,20 +96,45 @@ void drawCube()
 {
     static int rot=0;
     glPushMatrix();
-        glRotated(++rot,0,1,0);
+        glRotated(++rot,0,1,1);
         glBegin(GL_QUADS);
             glColor3f(1.0,0.0,0.0);
             glVertex3f(-1,-1,1);
             glVertex3f(-1,1,1);
             glVertex3f(1,1,1);
             glVertex3f(1,-1,1);
-        glEnd();
-        glBegin(GL_QUADS);
-            glColor3f(1.0,0.0,0.0);
-            glVertex3f(-1,-1,1);
-            glVertex3f(-1,1,1);
+
+            glColor3f(0.0,1.0,0.0);
+            glVertex3f(-1,-1,-1);
+            glVertex3f(-1,1,-1);
+            glVertex3f(1,1,-1);
+            glVertex3f(1,-1,-1);
+
+            glColor3f(0.0,0.0,1.0);
+            glVertex3f(1,-1,-1);
+            glVertex3f(1,1,-1);
             glVertex3f(1,1,1);
             glVertex3f(1,-1,1);
+
+            glColor3f(0.6,0.5,1.0);
+            glVertex3f(-1,1,-1);
+            glVertex3f(-1,1,1);
+            glVertex3f(-1,-1,1);
+            glVertex3f(-1,-1,-1);
+
+            //Top
+            glColor3f(0.6,0.9,0.2);
+            glVertex3f(1,1,-1);
+            glVertex3f(1,1,1);
+            glVertex3f(-1,1,1);
+            glVertex3f(-1,1,-1);
+
+            //Bottom
+            glColor3f(0.6,0.9,0.2);
+            glVertex3f(1,-1,-1);
+            glVertex3f(1,-1,1);
+            glVertex3f(-1,-1,1);
+            glVertex3f(-1,-1,-1);
         glEnd();
     glPopMatrix();
 }
